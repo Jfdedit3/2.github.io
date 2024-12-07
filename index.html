@@ -5,56 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Vidéo Futuriste</title>
-    <style>
-        /* Style global pour enlever les marges et remplir la fenêtre */
-        body, html {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Empêche le défilement */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #000; /* Arrière-plan sombre */
-        }
-
-        /* Vidéo avec améliorations d'effets futuristes */
-        video {
-            width: 90%; /* Largeur de la vidéo */
-            height: auto;
-            object-fit: cover; /* Recouvre l'intégralité de l'espace */
-            border-radius: 15px; /* Bords arrondis pour un effet plus doux */
-            filter: brightness(70%) contrast(150%) saturate(200%) blur(5px); /* Effets de filtre futuristes */
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.6); /* Ombre futuriste */
-            transition: transform 0.6s ease; /* Transition fluide sur la transformation */
-        }
-
-        /* Effet au survol de la vidéo */
-        video:hover {
-            transform: scale(1.05); /* Zoom au survol */
-            filter: brightness(90%) contrast(140%) saturate(180%) blur(0px); /* Effet de survol amélioré */
-        }
-
-        /* Animation d'entrée pour rendre l'apparition plus fluide */
-        video {
-            animation: fadeIn 1.5s ease-in-out; /* Animation d'apparition progressive */
-        }
-
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-    </style>
 </head>
 <body>
 
-    <!-- Vidéo principale affichée sur la page avec effets futuristes -->
+    <!-- Vidéo principale affichée sur la page -->
     <video autoplay loop muted>
         <source src="https://files.catbox.moe/n9qp1j.mp4" type="video/mp4">
     </video>
