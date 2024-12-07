@@ -18,8 +18,8 @@
             background-color: #121212; /* Arrière-plan sombre pour un effet futuriste */
         }
 
-        /* Vidéo avec améliorations d'effets */
-        video {
+        /* Vidéo principale avec améliorations d'effets */
+        video.main-video {
             width: 90%; /* Largeur de la vidéo */
             height: auto;
             object-fit: cover; /* Recouvre l'intégralité de l'espace */
@@ -29,14 +29,14 @@
             transition: transform 0.6s ease, filter 0.6s ease; /* Transition fluide sur les effets */
         }
 
-        /* Effet au survol de la vidéo */
-        video:hover {
+        /* Effet au survol de la vidéo principale */
+        .main-video:hover {
             transform: scale(1.08); /* Zoom au survol */
             filter: brightness(90%) contrast(140%) saturate(170%) blur(0px); /* Amélioration des effets lors du survol */
         }
 
         /* Animation d'entrée pour rendre l'apparition plus fluide */
-        video {
+        .main-video {
             animation: fadeIn 1.5s ease-in-out; /* Animation d'apparition progressive */
         }
 
@@ -49,6 +49,19 @@
                 opacity: 1;
                 transform: scale(1);
             }
+        }
+
+        /* Vidéo secondaire en arrière-plan */
+        video.bg-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%; /* Plein écran */
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(50%) contrast(100%) saturate(200%) blur(10px);
+            pointer-events: none; /* Empêche les interactions */
+            z-index: -1; /* Place en arrière-plan */
         }
 
         /* Particules animées pour un effet futuriste supplémentaire */
@@ -86,8 +99,13 @@
 </head>
 <body>
 
-    <!-- Vidéo affichée sur la page avec effets -->
-    <video autoplay loop>
+    <!-- Vidéo principale affichée sur la page avec effets -->
+    <video autoplay loop class="main-video">
+        <source src="https://files.catbox.moe/n9qp1j.mp4" type="video/mp4">
+    </video>
+
+    <!-- Vidéo en arrière-plan -->
+    <video autoplay loop muted class="bg-video">
         <source src="https://files.catbox.moe/n9qp1j.mp4" type="video/mp4">
     </video>
 
