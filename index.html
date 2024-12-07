@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Vidéo Améliorée avec Effets</title>
+    <title>Vidéo Futuriste</title>
     <style>
         /* Style global pour enlever les marges et remplir la fenêtre */
         body, html {
@@ -15,28 +15,28 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #121212; /* Arrière-plan sombre pour un effet futuriste */
+            background-color: #000; /* Arrière-plan sombre */
         }
 
-        /* Vidéo principale avec améliorations d'effets */
-        video.main-video {
+        /* Vidéo avec améliorations d'effets futuristes */
+        video {
             width: 90%; /* Largeur de la vidéo */
             height: auto;
             object-fit: cover; /* Recouvre l'intégralité de l'espace */
             border-radius: 15px; /* Bords arrondis pour un effet plus doux */
-            filter: brightness(80%) contrast(130%) saturate(150%) blur(2px); /* Amélioration de la luminosité, du contraste et saturation */
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.6), inset 0 0 30px rgba(0, 255, 255, 0.4); /* Ombre futuriste */
-            transition: transform 0.6s ease, filter 0.6s ease; /* Transition fluide sur les effets */
+            filter: brightness(70%) contrast(150%) saturate(200%) blur(5px); /* Effets de filtre futuristes */
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.6); /* Ombre futuriste */
+            transition: transform 0.6s ease; /* Transition fluide sur la transformation */
         }
 
-        /* Effet au survol de la vidéo principale */
-        .main-video:hover {
-            transform: scale(1.08); /* Zoom au survol */
-            filter: brightness(90%) contrast(140%) saturate(170%) blur(0px); /* Amélioration des effets lors du survol */
+        /* Effet au survol de la vidéo */
+        video:hover {
+            transform: scale(1.05); /* Zoom au survol */
+            filter: brightness(90%) contrast(140%) saturate(180%) blur(0px); /* Effet de survol amélioré */
         }
 
         /* Animation d'entrée pour rendre l'apparition plus fluide */
-        .main-video {
+        video {
             animation: fadeIn 1.5s ease-in-out; /* Animation d'apparition progressive */
         }
 
@@ -50,72 +50,14 @@
                 transform: scale(1);
             }
         }
-
-        /* Vidéo secondaire en arrière-plan */
-        video.bg-video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%; /* Plein écran */
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(50%) contrast(100%) saturate(200%) blur(10px);
-            pointer-events: none; /* Empêche les interactions */
-            z-index: -1; /* Place en arrière-plan */
-        }
-
-        /* Particules animées pour un effet futuriste supplémentaire */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 5px;
-            height: 5px;
-            background: rgba(0, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: particle-move 5s linear infinite;
-        }
-
-        /* Animation des particules */
-        @keyframes particle-move {
-            from {
-                transform: translateY(100vh) translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateY(-10vh) translateX(50px);
-                opacity: 0;
-            }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Vidéo principale affichée sur la page avec effets -->
-    <video autoplay loop class="main-video">
+    <!-- Vidéo principale affichée sur la page avec effets futuristes -->
+    <video autoplay loop muted>
         <source src="https://files.catbox.moe/n9qp1j.mp4" type="video/mp4">
     </video>
 
-    <!-- Vidéo en arrière-plan -->
-    <video autoplay loop muted class="bg-video">
-        <source src="https://files.catbox.moe/n9qp1j.mp4" type="video/mp4">
-    </video>
-
-    <!-- Particules animées en arrière-plan pour un effet futuriste -->
-    <div class="particles">
-        <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
-        <div class="particle" style="left: 30%; animation-delay: 1s;"></div>
-        <div class="particle" style="left: 50%; animation-delay: 2s;"></div>
-        <div class="particle" style="left: 70%; animation-delay: 3s;"></div>
-        <div class="particle" style="left: 90%; animation-delay: 4s;"></div>
-    </div>
 </body>
 </html>
