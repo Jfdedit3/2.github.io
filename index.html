@@ -3,24 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lecteur Vidéo Minimaliste</title>
+    <meta name="description" content="Site web avec animations et menu avancé">
+    <title>Site avec Animations et Menu Avancé</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
+        :root {
+            --primary-color: #0afaff;
+            --secondary-color: #ff3e82;
+            --background-color: #1e1e2f;
+        }
+
         body {
+            background: var(--background-color) url('https://files.catbox.moe/g6cx83.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Roboto', system-ui, -apple-system, sans-serif;
+            color: #ffffff;
             margin: 0;
             padding: 0;
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #000;
         }
-        video {
-            width: 100%;
-            height: auto;
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 15px 20px;
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background: var(--primary-color);
+            color: #000;
+        }
+
+        nav ul li ul {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            min-width: 200px;
+            z-index: 1000;
+        }
+
+        nav ul li:hover > ul {
+            display: block;
+        }
+
+        nav ul li ul li a {
+            padding: 10px 15px;
+        }
+
+        nav ul li ul li a:hover {
+            background: var(--secondary-color);
+            color: #000;
+        }
+
+        .container {
+            text-align: center;
+            padding: 100px 20px 20px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color);
+            animation: textGlow 2s infinite alternate;
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color); }
+            to { text-shadow: 0 0 25px var(--primary-color), 0 0 50px var(--primary-color); }
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                width: 100%;
+            }
+
+            nav ul li ul {
+                position: static;
+            }
         }
     </style>
 </head>
 <body>
-    <video src="https://b0-videocdn.gjhyss.com/video/67749229329645581-source?expires=1737056337&sign=c147c332c5cddad6ae7f50369a8697ad" autoplay loop></video>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Accueil</a></li>
+                <li><a href="#">Services</a>
+                    <ul>
+                        <li><a href="#">Développement Web</a></li>
+                        <li><a href="#">Design Graphique</a></li>
+                        <li><a href="#">Marketing Digital</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container animate__animated animate__fadeIn">
+        <h1>Bienvenue sur Notre Site</h1>
+        <p>Nous créons des expériences numériques innovantes pour propulser votre entreprise vers de nouveaux sommets. Explorez nos services et découvrez comment nous pouvons collaborer pour réaliser vos projets.</p>
+    </div>
 </body>
 </html>
