@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualiseur d'Image Futuriste</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #7b2fff;
+            --dark-bg: #0a0a15;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, var(--dark-bg), #1a1a2e);
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            border-radius: 25px;
+            z-index: -1;
+            filter: blur(15px);
+            opacity: 0.5;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: popIn 1s ease forwards;
+            cursor: pointer;
+        }
+
+        .preview-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            animation: slideUp 1s ease forwards;
+        }
+
+        .url-input, .file-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .url-input:focus, .file-input:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .url-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .cyber-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            filter: blur(30px);
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        .cyber-circle:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            left: -150px;
+        }
+
+        .cyber-circle:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            right: -100px;
+            background: linear-gradient(-45deg, var(--neon-purple), var(--neon-blue));
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.15;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.2;
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .cyber-circle {
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .cyber-circle:nth-child(2) {
+            animation-delay: -2s;
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 14px;
+            margin-top: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .fullscreen {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90vw;
+            height: 90vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .fullscreen img {
+            max-width: 100%;
+            max-height: 100%;
+            animation: popIn 0.5s forwards;
+        }
+
+        .input-group input {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .input-group input:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-circle"></div>
+    <div class="cyber-circle"></div>
+    <div class="container">
+        <img src="local_image.jpg" class="preview-image" id="previewImage">
+        <div class="input-group">
+            <input 
+                type="text" 
+                class="url-input" 
+                placeholder="Collez l'URL de votre image ici"
+                value="local_image.jpg"
+                oninput="updateImage(this.value)"
+            >
+            <input 
+                type="file" 
+                class="file-input" 
+                accept="image/*"
+                onchange="loadFile(event)"
+            >
+        </div>
+        <div class="error-message" id="errorMessage">L'URL de l'image semble invalide</div>
+    </div>
+
+    <script>
+        function updateImage(url) {
+            const img = document.getElementById('previewImage');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Créer une nouvelle image pour tester l'URL
+            const testImage = new Image();
+            testImage.onload = function() {
+                img.src = url;
+                errorMessage.style.opacity = '0';
+            };
+            
+            testImage.onerror = function() {
+                errorMessage.style.opacity = '1';
+                // Garder l'ancienne image en cas d'erreur
+            };
+            
+            testImage.src = url;
+        }
+
+        function loadFile(event) {
+            const img = document.getElementById('previewImage');
+            const errorMessage = document.getElementById('errorMessage');
+            const reader = new FileReader();
+            
+            reader.onload = function() {
+                img.src = reader.result;
+                errorMessage.style.opacity = '0';
+            };
+            
+            reader.onerror = function() {
+                errorMessage.style.opacity = '1';
+                // Garder l'ancienne image en cas d'erreur
+            };
+            
+            reader.readAsDataURL(event.target.files[0]);
+        }
+
+        // Fonction pour agrandir l'image lorsqu'elle est cliquée
+        document.getElementById('previewImage').addEventListener('click', function() {
+            const fullscreenDiv = document.createElement('div');
+            fullscreenDiv.classList.add('fullscreen');
+            
+            const img = document.createElement('img');
+            img.src = this.src;
+            fullscreenDiv.appendChild(img);
+            
+            fullscreenDiv.addEventListener('click', function() {
+                document.body.removeChild(fullscreenDiv);
+            });
+            
+            document.body.appendChild(fullscreenDiv);
+        });
+    </script>
+</body>
+</html>
